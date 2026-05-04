@@ -1,4 +1,4 @@
-CFLAGS =  -Wall -std=c23 -g -Iinclude #-O2
+CFLAGS = -O2 -Wall -std=c23 -Iinclude #-g
 LDFLAGS =
 CC = cc
 DBG = gdb
