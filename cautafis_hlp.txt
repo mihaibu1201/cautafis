@@ -1,0 +1,150 @@
+Programul caută într-un director trimis parametru fișerele și / sau directoarele
+care se aseamănă ca denumire cu numele trimis parametru, sau care respectă o
+regulă regex trimisă parametru.
+Fișierele sau directoarele pot fi afișate în mod sortat alfabetic, sau în
+funcție de dimensiune, sau în funcție de data ultimei modificări. Listarea se
+poate face crescător sau descrescător.
+Dacă sunt căutate doar fișiere, atunci va fi afișată calea completă, numele și
+dimensiunea fișierului, pentru fiecare fișier care îndeplinește condițiile
+de căutare.
+Dacă sunt căutate directoare, atunci va fi afișată calea compleată și numele
+directorului, pentru fiecare director care îndeplinește condițiile de căutare.
+
+Mod de folosire.
+------------------
+Opțiuni minime la lansarea programului:
+./cautafis -c <director start> -n <nume fișier>
+sau:
+./cautafis -c <director start> -r <expresie regex>
+sau:
+./cautafis -h, caz în care se afișează un text help
+----------------
+
+La lansarea programului:
+Sunt obligatorii minim două opțiuni:
+    1) -c <nume_director> sau --cale <nume_director>, unde <nume_director>
+        este numele directorului din care se pornește căutarea,
+    2) -n <nume_fișier> sau --nume <nume_fișier>, unde <nume_fișier>
+        este numele fișierului care se dorește a fi găsit.
+Sau:
+    1) -c <nume_director> sau --cale <nume_director>, unde <nume_director>
+        este numele directorului din care se pornește căutarea,
+    2) -r <expresie regex> sau --regex <expresie regex>, unde <expresie regex>
+        este o expresie regex validă folosită la căutarea fișierului.
+Sau:
+    O singură opțiune, dar care să fie -h sau --help, caz în care este afișat
+    acest text, sau un alt text cu opțiunile de start.
+
+Alte opțiuni, neobligatorii, la lansarea programului:
+    *   -i sau --ignore-case:
+        Dacă este prezentă opțiunea, nu se va face distincția între literele
+        mari și literele mici la căutare.
+    *   -f sau --fisiere:
+        Vor fi căutate doar fișiere normale.
+    *   -d sau --directoare:
+        Vor fi căutate doar directoare.
+        Dacă nu sunt prezente, simultan, nici -f nici -D, vor fi căutate și
+        directoare și fișiere.
+    *   -a sau --adancime, urmată obligatoriu de un număr:
+        Opțiunea indică numărul de nivele la care se coboară în structura de
+        directoare de sub directorul de start în care se face căutarea.
+        Dacă nu este folosită această opțiune, căutarea se face în toate
+        subdirectoarele directorului de start.
+    *   -r sau --regex <expresie regex>:
+        Dacă este prezentă opțiunea, se vor folosi regulile regex la căutarea
+        fișierelor sau directoarelor. Altfel, căutarea se face după nume.
+    *   -m sau --min-size, urmată obligatoriu de <număr>, în Megabytes.
+        Vor fi afișate doar fișierele care au dimensiunea mai mare decât <număr>;
+        -M sau --max-size, urmată obligatoriu de <număr>, în Megabytes.
+        Vor fi afișate doar fișierele care au dimensiunea mai mică decât <număr>;
+    *   -s sau --sortare:
+        Opțiunea indică tipul de sortare folosit pentru listarea fișierelor sau /
+        și directoarelor găsite. Parametrii care trebuie folosiți pentru această
+        opțiune sunt:a = sortare după nume, s = sortare după dimensiune,
+        d = sortare după data fișierului.
+        Dacă nu este prezentă opțiunea, sortarea se va face după numele fișierului.
+    *   -l sau --list-desc:
+        Dacă este prezentă opțiunea va face ca listarea să fie facută în mod
+        descendent, ținând cont de modul de sortare de la opțiunea -s.
+        Dacă nu este prezentă, sortarea se va face ascendent.
+
+    *   -h sau --help:
+        Este afișat acest text, sau un alt text cu opțiunile de start.
+
+Exemple de folosire:
+----------------------
+    ./cautafis -c /home/user -n tehnic
+    ./cautafis --cale /home/user --nume tehnic
+Vor fi căutate toate fișierele și directoarele care conțin șirul 'tehnic'
+în nume, în directorul /home/user și în toate subdirectoarele acestuia.
+
+    ./cautafis -h
+    ./cautafis --help
+Este afișat un text cu opțiunile de start și caracteristicile programului.
+
+    ./cautafis -c /home/user -n tehnic -m 50
+    ./cautafis --cale /home/user --nume tehnic --min-size 50
+Vor fi căutate toate fișierele și directoarele care conțin șirul 'tehnic' în
+nume, în directorul /home/user și în toate subdirectoarele acestuia și vor
+fi afișate cele care au dimensiunea minimă de 50 Megabytes.
+
+    ./cautafis -c /home/user -n tehnic -M 50
+    ./cautafis --cale /home/user --nume tehnic --max-size 50
+Vor fi căutate toate fișierele și directoarele care conțin șirul 'tehnic' în
+nume, în directorul /home/user și în toate subdirectoarele acestuia și vor
+fi afișate cele care au dimensiunea maximă de 50 Megabytes.
+
+    ./cautafis -c /home/user -n tehnic -m 50 -M 51
+    ./cautafis --cale /home/user --nume tehnic --min-size 50 --max-size 51
+Vor fi căutate toate fișierele care conțin șirul 'tehnic' în nume, în directorul
+/home/user și în toate subdirectoarele acestuia și vor fi afișate cele care au
+dimensiunea minimă de 50 Megabytes și dimensiunea maximă de 51 Megabytes.
+
+    ./cautafis -c /home/user -n tehnic -d
+    ./cautafis --cale /home/user --nume tehnic --directoare
+Vor fi căutate toate directoarele care conțin șirul 'tehnic' în nume, în directorul
+/home/user și în toate subdirectoarele acestuia.
+
+    ./cautafis -c /home/user -n tehnic -d -a 5
+    ./cautafis --cale /home/user --nume tehnic --directoare --adancime 5
+Vor fi căutate toate directoarele care conțin șirul 'tehnic' în nume, în directorul
+/home/user și în toate subdirectoarele acestuia, pe o adăncime de 5 niveluri sub
+directorul /home/user.
+
+
+    ./cautafis -c /home/user -r d?nsa.t?t
+    ./cautafis --cale /home/user --regex d?nsa.t?t
+Vor fi căutate toate fișierele și directoarele al căror nume conține litera 't"
+pe prima poziție, pe a doua poziție poate conține orice caracter, iar restul
+de caractere din nume este 'ehnic', apoi extensia conține litera 't' pe prima
+și pe a treia poziție, iar pe a doua poziție poate fi orice caracter.
+Ex: dansa.txt, dinsa.txt, densa.txt, dansa.tmt.
+Căutarea se face în directorul /home/user și în toate subdirectoarele acestuia,
+respectând regulile regex.
+
+    ./cautafis -c /home/user -n tehnic -s s -l
+    ./cautafis --cale /home/user --nume tehnic --sortare s --list-desc
+Vor fi căutate toate fișierele și directoarele care conțin șirul 'tehnic' în nume,
+în directorul /home/user și în toate subdirectoarele acestuia, iar fișierele găsite
+vor fi sortate în funcție de dimensiune, descendent.
+
+Notă:
+----------
+Opțiunile   -m și -d (echivalent --min-size și --directoare),
+            sau
+            -M și -d (echivalent --max-size și --directoare)
+            nu sunt compatibile și nu pot apărea simultan.
+            Dacă sunt prezente la lansare va fi afișat un mesaj de eroare.
+            -s și -d (echivalent cu --sortare și --directoare) nu sunt compatibile
+            și nu pot apare simultan. Directoarele vor fi întotdeauna sortate doar
+            după nume - ascendent sau descendent, depinzând de existența sau nu
+            a opțiunii -l (echivalent --list-desc).
+            -n -r (echivalent --nume și --regex) nu sunt compatibile și nu pot
+            apare simultan.
+            Opțiunea -n (folosită pentru a căuta fișiere și / sau directoare după
+            nume) poate include caracterele:
+                - '?' care caută orice caracter (doar de pe poziția respectivă);
+                - '*' care caută orice caracter (începând cu poziția respectivă).
+            Ex. pt d?nsa.txt: dansa.txt, dinsa.txt, densa.txt
+            Ex. pt d*.txt:  toate fișierele care încep cu litera 'd' și au extensia
+            'txt'.
