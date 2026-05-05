@@ -4,7 +4,7 @@
 1. [Descriere](#descriere)
 2. [Mod de folosire](#mod-de-folosire)
 3. [Opțiunile de căutare](#opțiunile-de-căutare)
-4. [Opțiunile de rafinare a căutarii](#opțiunile-de_rafinare-a-căutării)
+4. [Opțiunile de rafinare a căutarii](#opțiunile-de-rafinare-a-căutării)
 5. [Opțiunile de listare](#opțiunile-de-listare)
 4. [Exemple de folosire](#exemple-de-folosire)
 
