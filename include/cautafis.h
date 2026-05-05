@@ -3,7 +3,12 @@
 
 #include <sys/stat.h>
 
-#define FISIER_HELP "cautafis_hlp.txt"
+//#define DEBUG
+#ifdef DEBUG
+    #define FISIER_HELP "cautafis_hlp.txt"
+#else
+    #define FISIER_HELP "/usr/local/bin/cautafis_hlp.txt"
+#endif
 
 // Toate argumentele și toți parametrii programului sunt ok.
 #define OPT_OK      0

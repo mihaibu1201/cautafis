@@ -304,9 +304,9 @@ void vAfisHelpMinimal()
         "-d sau --directoare        -> se caută doar directoare.\n"\
         "-a sau --adancime <număr>  -> numărul de subdirectoare în jos pt căutare.\n" \
         "-r sau --regex <expresie>  -> căutarea se face respectând regulile regex.\n"\
-        "-m sau --min-size <număr>  -> sunt selectate doar fișierele cu dimensiunea:\n"\
+        "-m sau --min-size <număr>  -> sunt selectate doar fișierele cu dimensiunea\n"\
         "\t\t\t\tminimă de <număr> = MegaBytes.\n"\
-        "-M sau --maxn-size <număr> -> sunt selectate doar fișierele cu dimensiunea:\n"\
+        "-M sau --maxn-size <număr> -> sunt selectate doar fișierele cu dimensiunea\n"\
         "\t\t\t\tmaximă de <număr> = MegaBytes.\n"\
         "-s sau --sortare [a/s/d]   -> modul de sortare: \n"
         "\t\t\t\ta = după nume, s = după dimensiune, t = după data fișierului.\n"\
@@ -331,13 +331,17 @@ int nAfisHelpFisier()
 {
 int nRet;
 FILE *pFIn;
-char* pszDataFis;
+char* pszDataFis = {0};
 size_t nDimData;
     nRet = 1;
     nDimData = 0L;
 
+    // printf("Fișier help: %s\n", FISIER_HELP);
+
     if((pFIn = fopen(FISIER_HELP, "rt")) == NULL)
+    {
         nRet = 0;   //fișier negăsit sau nu se deschide
+    }
     else
     {
         if (fseek(pFIn, 0L, SEEK_END))

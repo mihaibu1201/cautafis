@@ -3,8 +3,10 @@ LDFLAGS =
 CC = cc
 DBG = gdb
 BUILD_DIR = build
+TARGET_DIR = /usr/local/bin
 SRC_DIR = src
-TARGET = $(BUILD_DIR)/cautafis
+EXE = cautafis
+TARGET = $(BUILD_DIR)/$(EXE)
 HELPFILE = cautafis_hlp.txt
 SOURCES = $(wildcard $(SRC_DIR)/*.c)
 OBJECTS = $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SOURCES))
@@ -41,3 +43,10 @@ debug:	$(TARGET)
 	$(DBG) -tui --args $(TARGET) $(ARGS)
 
 .PHONY: all clean run debug
+
+install:
+	cp $(TARGET) $(TARGET_DIR)
+	cp $(HELPFILE) $(TARGET_DIR)
+uninstall:
+	rm $(TARGET_DIR)/$(EXE)
+	rm $(TARGET_DIR)/$(HELPFILE)
