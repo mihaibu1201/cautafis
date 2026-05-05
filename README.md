@@ -2,11 +2,11 @@
 ### Aplicație utilitar pentru căutarea obiectelor de tip fișier și / sau director 
 ### Conținut
 1. [Descriere](#descriere)
-2. [Mod de folosire](#mod_de_folosire)
-3. [Opțiunile de căutare](#opțiunile_de_căutare)
-4. [Opțiunile de rafinare a căutarii](#opțiunile_de_rafinare_a_căutării)
-5. [Opțiunile de listare](#opțiunile_de_listare)
-4. [Exemple de folosire](#exemple_de-folosire)
+2. [Mod de folosire](#mod-de-folosire)
+3. [Opțiunile de căutare](#opțiunile-de-căutare)
+4. [Opțiunile de rafinare a căutarii](#opțiunile-de_rafinare-a-căutării)
+5. [Opțiunile de listare](#opțiunile-de-listare)
+4. [Exemple de folosire](#exemple-de-folosire)
 
 <!-- toc -->
 ## Descriere
