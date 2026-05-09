@@ -13,11 +13,13 @@ directorului, pentru fiecare director care îndeplinește condițiile de căutar
 Mod de folosire.
 ------------------
 Opțiuni minime la lansarea programului:
-./cautafis -c <director start> -n <nume fișier>
+cautafis -c <director start> -n <nume fișier>
 sau:
-./cautafis -c <director start> -r <expresie regex>
+cautafis -c <director start> -r <expresie regex>
 sau:
-./cautafis -h, caz în care se afișează un text help
+cautafis -h, caz în care se afișează un text help
+sau:
+cautafis -v, caz în care se afișează numele și versiunea programului.
 ----------------
 
 La lansarea programului:
@@ -34,6 +36,9 @@ Sau:
 Sau:
     O singură opțiune, dar care să fie -h sau --help, caz în care este afișat
     acest text, sau un alt text cu opțiunile de start.
+Sau:
+    O singură opțune, dar care să fie -v sau --versiune, caz în care sunt afișate
+    numele și versiunea programului.
 
 Alte opțiuni, neobligatorii, la lansarea programului:
     *   -i sau --ignore-case:
@@ -73,47 +78,51 @@ Alte opțiuni, neobligatorii, la lansarea programului:
 
 Exemple de folosire:
 ----------------------
-    ./cautafis -c /home/user -n tehnic
-    ./cautafis --cale /home/user --nume tehnic
+    cautafis -c /home/user -n tehnic
+    cautafis --cale /home/user --nume tehnic
 Vor fi căutate toate fișierele și directoarele care conțin șirul 'tehnic'
 în nume, în directorul /home/user și în toate subdirectoarele acestuia.
 
-    ./cautafis -h
-    ./cautafis --help
+    cautafis -h
+    cautafis --help
 Este afișat un text cu opțiunile de start și caracteristicile programului.
 
-    ./cautafis -c /home/user -n tehnic -m 50
-    ./cautafis --cale /home/user --nume tehnic --min-size 50
+    cautafis -v
+    cautafis --versiune
+Sunt afișate numele și versiunea programului.
+
+    cautafis -c /home/user -n tehnic -m 50
+    cautafis --cale /home/user --nume tehnic --min-size 50
 Vor fi căutate toate fișierele și directoarele care conțin șirul 'tehnic' în
 nume, în directorul /home/user și în toate subdirectoarele acestuia și vor
 fi afișate cele care au dimensiunea minimă de 50 Megabytes.
 
-    ./cautafis -c /home/user -n tehnic -M 50
-    ./cautafis --cale /home/user --nume tehnic --max-size 50
+    cautafis -c /home/user -n tehnic -M 50
+    cautafis --cale /home/user --nume tehnic --max-size 50
 Vor fi căutate toate fișierele și directoarele care conțin șirul 'tehnic' în
 nume, în directorul /home/user și în toate subdirectoarele acestuia și vor
 fi afișate cele care au dimensiunea maximă de 50 Megabytes.
 
-    ./cautafis -c /home/user -n tehnic -m 50 -M 51
-    ./cautafis --cale /home/user --nume tehnic --min-size 50 --max-size 51
+    cautafis -c /home/user -n tehnic -m 50 -M 51
+    cautafis --cale /home/user --nume tehnic --min-size 50 --max-size 51
 Vor fi căutate toate fișierele care conțin șirul 'tehnic' în nume, în directorul
 /home/user și în toate subdirectoarele acestuia și vor fi afișate cele care au
 dimensiunea minimă de 50 Megabytes și dimensiunea maximă de 51 Megabytes.
 
-    ./cautafis -c /home/user -n tehnic -d
-    ./cautafis --cale /home/user --nume tehnic --directoare
+    cautafis -c /home/user -n tehnic -d
+    cautafis --cale /home/user --nume tehnic --directoare
 Vor fi căutate toate directoarele care conțin șirul 'tehnic' în nume, în directorul
 /home/user și în toate subdirectoarele acestuia.
 
-    ./cautafis -c /home/user -n tehnic -d -a 5
-    ./cautafis --cale /home/user --nume tehnic --directoare --adancime 5
+    cautafis -c /home/user -n tehnic -d -a 5
+    cautafis --cale /home/user --nume tehnic --directoare --adancime 5
 Vor fi căutate toate directoarele care conțin șirul 'tehnic' în nume, în directorul
 /home/user și în toate subdirectoarele acestuia, pe o adăncime de 5 niveluri sub
 directorul /home/user.
 
 
-    ./cautafis -c /home/user -r d?nsa.t?t
-    ./cautafis --cale /home/user --regex d?nsa.t?t
+    cautafis -c /home/user -r d?nsa.t?t
+    cautafis --cale /home/user --regex d?nsa.t?t
 Vor fi căutate toate fișierele și directoarele al căror nume conține litera 't"
 pe prima poziție, pe a doua poziție poate conține orice caracter, iar restul
 de caractere din nume este 'ehnic', apoi extensia conține litera 't' pe prima
@@ -122,8 +131,8 @@ Ex: dansa.txt, dinsa.txt, densa.txt, dansa.tmt.
 Căutarea se face în directorul /home/user și în toate subdirectoarele acestuia,
 respectând regulile regex.
 
-    ./cautafis -c /home/user -n tehnic -s s -l
-    ./cautafis --cale /home/user --nume tehnic --sortare s --list-desc
+    cautafis -c /home/user -n tehnic -s s -l
+    cautafis --cale /home/user --nume tehnic --sortare s --list-desc
 Vor fi căutate toate fișierele și directoarele care conțin șirul 'tehnic' în nume,
 în directorul /home/user și în toate subdirectoarele acestuia, iar fișierele găsite
 vor fi sortate în funcție de dimensiune, descendent.

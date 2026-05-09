@@ -16,6 +16,8 @@
 #define OPT_HELP    2
 // Eroare în argumente sau / si parametri
 #define OPT_ERR     1
+// A fost plasată opțiunea -v, pentru afișare versiune
+#define OPT_VERS    3
 
 // Tipuri de fișiere
 #define TIPFISIER_TOT   0
@@ -133,7 +135,7 @@ int nCautaFis(OptCLI*, CFis*, VLst*);
 int nAdaugaDirector(CFis*, char*, int);
 void vListeazaVectorDirectoareDebug(CFis*);
 int nParseazaLinieComanda(OptCLI*, int, char**);
-int nValideazaOptiuni(int, int, int, int, int, int, int, int);
+int nValideazaOptiuni(int, int, int, int, int, int, int);
 int nOptSetDirector(OptCLI*,char*);
 int nOptSetNumeFis(OptCLI*,char*);
 int nValidareNumeFis(char*);
@@ -168,6 +170,7 @@ int nListSortDimDesc(const void*, const void*);
 int nListSortDataDesc(const void*, const void*);
 int nListeazaVectorListare(VLst*);
 
+void vArataVersiunea(void);
 int main(int argc, char**argv);
 
 #endif      //__CAUTAFIS__H

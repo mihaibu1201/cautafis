@@ -28,6 +28,8 @@ Se poate face o rafinare a căutării, în funcție de opțunile trimise la lans
 	cautafis -c <director_start> -r <expresie_regex>
 	sau
 	cautafis -h
+	sau
+	cautafis -v
 
 ### Opțiuni de rafinare a căutării:
 - **-i** sau **--ignore-case**
@@ -39,6 +41,7 @@ Se poate face o rafinare a căutării, în funcție de opțunile trimise la lans
 - **-s** sau **--sortare**
 - **-l** sau **--list-desc**
 - **-h** sau **--help**
+- **-v** sau **--versiune**
  
 ## Opțiunile de căutare
 
@@ -115,6 +118,10 @@ Vor fi căutate toate fișierele și directoarele care conțin șirul 'tehnic'
     cautafis -h
     cautafis --help
 Este afișat un text cu opțiunile de start și caracteristicile programului.<br>
+
+	cautafis -v
+	cautafis --versiune
+Este afișat un text cuprinzând numele și versiunea programului.
 
     cautafis -c /home/user -n tehnic -m 50
     cautafis --cale /home/user --nume tehnic --min-size 50

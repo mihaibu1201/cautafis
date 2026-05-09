@@ -34,6 +34,7 @@
 
 #include "../include/cautafis.h"
 #include "../include/cautafis_rgx.h"
+#include "../include/versiune.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -113,6 +114,9 @@ int nRez;
             {
                 goto fExit;
             }
+        break;
+        case OPT_VERS:
+            vArataVersiunea();
         break;
         case ERR_ALOCARE:   // Aici doar dacă ratează la alocare în nOptSetRegex()
             goto fExit;
@@ -311,7 +315,8 @@ void vAfisHelpMinimal()
         "-s sau --sortare [a/s/d]   -> modul de sortare: \n"
         "\t\t\t\ta = după nume, s = după dimensiune, t = după data fișierului.\n"\
         "-l sau --list-desc         -> listarea se va face descendent;implicit este ascendent.\n"\
-        "-h sau --help              -> se afișează un text help");
+        "-h sau --help              -> se afișează un text help."\
+        "-v sau --versiune          -> se afișează versiunea programului.");
     printf("\n");
 
 return;
@@ -413,7 +418,6 @@ int nParseazaLinieComanda(OptCLI* pOpt, int argc, char ** argv)
 int nRet;
 int nOptiune;
 
-int bHasHelp;       // Opțiunea -h
 int bHasDir;        // Opțiunea -c
 int bHasNumeFis;    // Opțiunea -n
 int bHasTipDir;     // Opțiunea -d
@@ -423,7 +427,7 @@ int bHasDimensMax;  // Opțiunea -M
 int bHasTipSortare; // Opțiunea -s
 
     nRet = OPT_OK;
-    bHasHelp = bHasDir = bHasNumeFis = bHasTipDir = bHasRegex = bHasDimensMin = bHasDimensMax = bHasTipSortare = 0;
+    bHasDir = bHasNumeFis = bHasTipDir = bHasRegex = bHasDimensMin = bHasDimensMax = bHasTipSortare = 0;
 
 struct option long_options[] = {
     {"cale", required_argument, 0,      'c'},
@@ -438,18 +442,21 @@ struct option long_options[] = {
     {"sortare", required_argument, 0,   's'},
     {"list-desc", required_argument, 0, 'l'},
     {"help", no_argument, 0,            'h'},
+    {"versiune", no_argument, 0,        'v'},
     {0, 0, 0, 0}
 };
 
-    while ((nOptiune = getopt_long(argc, argv, "c:n:ifda:r:m:M:s:lh", long_options, NULL)) != -1)
+    while ((nOptiune = getopt_long(argc, argv, "c:n:ifda:r:m:M:s:lhv", long_options, NULL)) != -1)
     {
         switch (nOptiune) {
             case 'h':
-                bHasHelp = 1;
                 nRet = OPT_HELP;
                 goto fExit;
             break;
-
+            case 'v':
+                nRet = OPT_VERS;
+                goto fExit;
+            break;
             case 'c':
                 bHasDir = 1;
                 if (nOptSetDirector(pOpt, optarg))
@@ -531,7 +538,7 @@ struct option long_options[] = {
         }
     }
 
-    nRet = nValideazaOptiuni(bHasHelp, bHasDir, bHasNumeFis, bHasTipDir, bHasRegex,
+    nRet = nValideazaOptiuni(bHasDir, bHasNumeFis, bHasTipDir, bHasRegex,
                              bHasDimensMin, bHasDimensMax, bHasTipSortare);
 
 fExit:
@@ -546,7 +553,7 @@ return nRet;
  * Verifică existența obligatorie a opțiunilor -d și -n, sau doar a optiunii -h,
  * precum și a inexistenței simultane a opțiunilor -t și -s (director și dimensiune)
  * Parametri:
- *      - bHelp, bDir, bNume, bTip, bRegex, bDimensMin, bDimensMax, bTipSortare:
+ *      -   bDir, bNume, bTip, bRegex, bDimensMin, bDimensMax, bTipSortare:
  *          dacă oricare dintre ele este egal cu 1, înseamnă că programul a primit
  *          opțiunea respectivă;
  * Return:
@@ -554,17 +561,13 @@ return nRet;
  *      OPT_ERR, dacă nu sunt îndeplinite condițiile de mai sus;
  *      OPT_HELP, dacă a fost prezentă opțiunea -h
  */
-int nValideazaOptiuni(int bHelp, int bDir, int bNume, int bTip, int bRegex,
+int nValideazaOptiuni(int bDir, int bNume, int bTip, int bRegex,
                       int bDimensMin, int bDimensMax, int bTipSortare)
 {
 int nRet;
     nRet = OPT_OK;
 
-    if(bHelp)
-    {
-        nRet = OPT_HELP;
-    }
-    else if (!bDir) // || !bNume)
+    if (!bDir)
     {
         printf("Trebuie să fie prezent numele directorului de start\n");
         nRet = OPT_ERR;
@@ -2176,4 +2179,14 @@ fExit:
 
 return nRet;
 }//nListeazaVectorListare
+/*****************************************************************************/
+/* Funcția afișează un mesaj conținând numele și versiunea programului.
+ * Apelată de: main().
+ * Parametri: none.
+ * Return: none.
+ */
+void vArataVersiunea()
+{
+    printf("%s versiune: %s\n", APP_NUME, APP_VERSIUNE);
+}//vArataVersiunea
 /*****************************************************************************/
