@@ -17,10 +17,12 @@
  * -s sau --sortare
  * -l sau --list-desc
  * -h sau --help
+ * -v sau --versiune
  *
- * Opțiuni minime la start: ./cautafis -c <director start> -n <nume fișier>
- *                      sau ./cautafis -c <director start> -r <expresie regex>
- *                      sau ./cautafis -h
+ * Opțiuni minime la start: cautafis -c <director start> -n <nume fișier>
+ *                      sau cautafis -c <director start> -r <expresie regex>
+ *                      sau cautafis -h
+ *                      sau cautafis -v
  *
  * Pentru modul de folosire de către utilizator, detaliile sunt în fișierul
  * cautafis_hlp.txt.
@@ -296,11 +298,11 @@ void vAfisHelpMinimal()
     printf("Opțiuni program:\n");
     printf("----------------\n");
     printf("Opțiuni minime la lansarea programului:\n"
-            "./cautafis -c <director start> -n <nume fișier>\n"\
+            "cautafis -c <director start> -n <nume fișier>\n"\
             "sau:\n"\
-            "./cautafis -c <director start> -r <expresie regex>\n"\
+            "cautafis -c <director start> -r <expresie regex>\n"\
             "sau:\n"\
-            "./cautafis -h, caz în care se afișează un text help\n");
+            "cautafis -h, caz în care se afișează un text help\n");
     printf("----------------\n");
     printf("Opțiuni de rafinare a căutării:\n" \
         "-i sau --ignore-case       -> nu se ține cont de litere mari și mici.\n"\
