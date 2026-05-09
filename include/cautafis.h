@@ -61,8 +61,8 @@ struct sOptiuniCLI
 typedef struct sOptiuniCLI OptCLI;
 //-----------------------------------------------------------------------------
 
-/* Structura pentru căutare directoarelor sCautaFis_X3:
- * sCautaFis_X3 conține un dublu pointer la o structură tip sDirector - m_pDirCaut,
+/* Structura pentru căutare directoarelor sCautaFis:
+ * sCautaFis conține un dublu pointer la o structură tip sDirector - m_pDirCaut,
  * un număr de directoare găsite și adăugate - m_nNrDirGasite și un număr de
  * directoare alocate - m_nNrAlocate. Acest câmp este folosit în momentul în care
  * este nevoie să se adauge un director nou: se face comparație între el și
