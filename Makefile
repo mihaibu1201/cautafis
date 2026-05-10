@@ -27,7 +27,7 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 #Include dependințe (headere)
 -include $(DEPS)
 
-#Targent principal
+#Target principal
 all: $(TARGET)
 
 #Curățare
