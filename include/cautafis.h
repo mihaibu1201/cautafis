@@ -2,6 +2,7 @@
 #define __CAUTAFIS__H
 
 #include <sys/stat.h>
+#include <regex.h>
 
 //#define DEBUG
 #ifdef DEBUG
@@ -51,7 +52,7 @@ struct sOptiuniCLI
     int m_nIgnoreCase;          // 0 cu Case; 1 fără Case.
     int m_nTipFisier;           // 0 = toate; 1 = doar fișiere; 2 = doar directaore.
     int m_nAdancime;            // Nr de niveluri de căutare; -1 = tot.
-    // int m_nRegex;               // 0 nu se folosește regex; 1 se folosește.
+    regex_t m_gRegex;           // Pentru compilare inițială expresie regex și căutari repetate.
     char* m_pszExprRegex;       // Expresia regex folosită la căutare.
     long m_lDimMin;             // Dimensiunea minimă de verificat, în MegaByes.
     long m_lDimMax;             // Dimensiunea maximă de verificat, în MegaByes.

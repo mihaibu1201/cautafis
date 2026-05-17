@@ -2,7 +2,7 @@
  * cautafis.c
  * Autor: Mihai Burcescu
  * Data: 04/05/2026
- * Ultima actualizare: 10/05/2026.
+ * Ultima actualizare: 17/05/2026.
  * Programul caută într-un director trimis parametru, fișere și / sau directoare
  * care se aseamănă ca denumire cu numele trimis parametru, sau care corespund
  * cu o expresie regex. Se poate face o rafinare a căutării, în funcție de
@@ -35,7 +35,7 @@
 #define _DEFAULT_SOURCE
 
 #include "../include/cautafis.h"
-#include "../include/cautafis_rgx.h"
+#include <rgxfis.h>
 #include "../include/versiune.h"
 
 #include <stdio.h>
@@ -54,9 +54,9 @@
 /*****************************************************************************/
 int main(int argc, char** argv)
 {
-OptCLI *pOptCLI;
-CFis* pCFis;
-VLst *pVLst;
+OptCLI *pOptCLI = {0};
+CFis* pCFis = {0};
+VLst *pVLst = {0};
 
 int nOpt;
 int nRez;
@@ -202,7 +202,6 @@ void vDezalocaTot(OptCLI** pOptCLI, CFis** pCFis, VLst** pVLst)
     vDezalocStructCLI(pOptCLI);
     vDezalocaDirectoare(pCFis);
     vDezalocListare(pVLst);
-    vDezalocaRegex();
 }//vDezalocaTot
 /*****************************************************************************/
 /* Funcția alocă un vector tip pointer la sOptiuni.
@@ -248,17 +247,29 @@ void vDezalocStructCLI(OptCLI ** pOptCLI)
         if((*pOptCLI)->m_pszDirector)
         {
             free ((*pOptCLI)->m_pszDirector);
+            (*pOptCLI)->m_pszDirector = NULL;
         }
 
         if((*pOptCLI)->m_pszNumeFis)
         {
             free ((*pOptCLI)->m_pszNumeFis);
+            (*pOptCLI)->m_pszNumeFis = NULL;
         }
 
         if((*pOptCLI)->m_pszExprRegex)
+        {
             free ((*pOptCLI)->m_pszExprRegex);
+            (*pOptCLI)->m_pszExprRegex = NULL;
+        }
+
+// Dacă s-a folosit expresie glob sau regex
+        if((*pOptCLI)->m_gRegex.__allocated > 0)
+        {
+            vDezalocaRegex(&(*pOptCLI)->m_gRegex);
+        }
 
         free(*pOptCLI);
+        *pOptCLI = NULL;
     }
 
 
@@ -949,7 +960,7 @@ char *pszExprRegex;
     nRet = nRegexValidareStricta(pszExprRegex);
     if (nRet == 0)
     {
-        nRet = nRegexValidareExpresie(pOptCLI, pszExprRegex);
+        nRet = nRegexValidareExpresie(&pOptCLI->m_gRegex, pOptCLI->m_nIgnoreCase, pszExprRegex);
     }
     else
     {
@@ -971,7 +982,11 @@ fExit:
     if (nRet != 0)
     {
         free (pszExprRegex);
-        vDezalocaRegex();
+
+        if(pOptCLI->m_gRegex.__allocated > 0)
+        {
+            vDezalocaRegex(&pOptCLI->m_gRegex);
+        }
     }
 
 return nRet;
@@ -1735,7 +1750,7 @@ int nRet;
     }
     else if (pOptCLI->m_pszExprRegex != NULL)
     {
-        nRet &= nFiltreazaDenumireRegex(pszDenumireFis);
+        nRet &= nFiltreazaDenumireRegex(&pOptCLI->m_gRegex, pszDenumireFis);
     }
 
 return nRet;

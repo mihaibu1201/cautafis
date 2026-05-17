@@ -1,5 +1,5 @@
 CFLAGS = -O2 -Wall -std=c23 -Iinclude #-g
-LDFLAGS =
+LDFLAGS = -lrgxfis
 CC = cc
 DBG = gdb
 BUILD_DIR = build
