@@ -50,6 +50,8 @@
 #include <ctype.h>
 #include <time.h>
 
+/* globală pentru variabilă pt regcomp și regexec-uri */
+RgxtG gRgxtG;
 
 /*****************************************************************************/
 int main(int argc, char** argv)
@@ -202,6 +204,13 @@ void vDezalocaTot(OptCLI** pOptCLI, CFis** pCFis, VLst** pVLst)
     vDezalocStructCLI(pOptCLI);
     vDezalocaDirectoare(pCFis);
     vDezalocListare(pVLst);
+
+    // Dacă s-a folosit expresie glob sau regex
+    if(gRgxtG.m_gRgxT.__allocated > 0)
+    {
+        vDezalocaRegex(&gRgxtG.m_gRgxT);
+    }
+
 }//vDezalocaTot
 /*****************************************************************************/
 /* Funcția alocă un vector tip pointer la sOptiuni.
@@ -260,12 +269,6 @@ void vDezalocStructCLI(OptCLI ** pOptCLI)
         {
             free ((*pOptCLI)->m_pszExprRegex);
             (*pOptCLI)->m_pszExprRegex = NULL;
-        }
-
-// Dacă s-a folosit expresie glob sau regex
-        if((*pOptCLI)->m_gRegex.__allocated > 0)
-        {
-            vDezalocaRegex(&(*pOptCLI)->m_gRegex);
         }
 
         free(*pOptCLI);
@@ -960,7 +963,7 @@ char *pszExprRegex;
     nRet = nRegexValidareStricta(pszExprRegex);
     if (nRet == 0)
     {
-        nRet = nRegexValidareExpresie(&pOptCLI->m_gRegex, pOptCLI->m_nIgnoreCase, pszExprRegex);
+        nRet = nRegexValidareExpresie(&gRgxtG.m_gRgxT, pOptCLI->m_nIgnoreCase, pszExprRegex);
     }
     else
     {
@@ -983,9 +986,9 @@ fExit:
     {
         free (pszExprRegex);
 
-        if(pOptCLI->m_gRegex.__allocated > 0)
+        if(gRgxtG.m_gRgxT.__allocated > 0)
         {
-            vDezalocaRegex(&pOptCLI->m_gRegex);
+            vDezalocaRegex(&gRgxtG.m_gRgxT);
         }
     }
 
@@ -1750,7 +1753,7 @@ int nRet;
     }
     else if (pOptCLI->m_pszExprRegex != NULL)
     {
-        nRet &= nFiltreazaDenumireRegex(&pOptCLI->m_gRegex, pszDenumireFis);
+        nRet &= nFiltreazaDenumireRegex(&gRgxtG.m_gRgxT, pszDenumireFis);
     }
 
 return nRet;

@@ -3,8 +3,8 @@
 
 #define APP_NUME    "cautafis"
 #define VERSIUNE_MAJOR  1
-#define VERSIUNE_MINOR  0
-#define VERSIUNE_PATCH  1
+#define VERSIUNE_MINOR  1
+#define VERSIUNE_PATCH  0
 
 #define STR_HELPER(x)   #x
 #define STR(x)  STR_HELPER(x)

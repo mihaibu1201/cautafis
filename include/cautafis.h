@@ -52,7 +52,6 @@ struct sOptiuniCLI
     int m_nIgnoreCase;          // 0 cu Case; 1 fără Case.
     int m_nTipFisier;           // 0 = toate; 1 = doar fișiere; 2 = doar directaore.
     int m_nAdancime;            // Nr de niveluri de căutare; -1 = tot.
-    regex_t m_gRegex;           // Pentru compilare inițială expresie regex și căutari repetate.
     char* m_pszExprRegex;       // Expresia regex folosită la căutare.
     long m_lDimMin;             // Dimensiunea minimă de verificat, în MegaByes.
     long m_lDimMax;             // Dimensiunea maximă de verificat, în MegaByes.
@@ -60,6 +59,16 @@ struct sOptiuniCLI
     int m_nListareDesc;         // 0 = Ascendent; 1 = Descendent.
 };
 typedef struct sOptiuniCLI OptCLI;
+
+/* Structura pentru stocarea unei variabile tip regex_t, care va fi folosită
+ * la compilarea inițială a expresiei de căutare, apoi la filtrări succesive
+ */
+struct sRgxTGlobal
+{
+    regex_t m_gRgxT;           // Pentru compilare inițială expresie regex și căutari repetate.
+};
+typedef struct sRgxTGlobal RgxtG;
+
 //-----------------------------------------------------------------------------
 
 /* Structura pentru căutare directoarelor sCautaFis:
