@@ -1,4 +1,4 @@
-CFLAGS = -O2 -Wall -std=c23 -Iinclude #-g
+CFLAGS = -O2 -Wall -std=c23 -Iinclude
 LDFLAGS = -lrgxfis
 CC = cc
 DBG = gdb
@@ -39,8 +39,12 @@ run:	$(TARGET) $(ARGS)
 	./$(TARGET) $(ARGS)
 
 #Debug
-debug:	$(TARGET)
+debug_rulare:	$(TARGET)
 	$(DBG) -tui --args $(TARGET) $(ARGS)
+
+# Cu simboluri pt debug
+debug:	CFLAGS += -g
+debug:	clean all
 
 .PHONY: all clean run debug
 
