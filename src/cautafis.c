@@ -2,7 +2,7 @@
  * cautafis.c
  * Autor: Mihai Burcescu
  * Data: 04/05/2026
- * Ultima actualizare: 17/05/2026.
+ * Ultima actualizare: 19/05/2026.
  * Programul caută într-un director trimis parametru, fișere și / sau directoare
  * care se aseamănă ca denumire cu numele trimis parametru, sau care corespund
  * cu o expresie regex. Se poate face o rafinare a căutării, în funcție de
