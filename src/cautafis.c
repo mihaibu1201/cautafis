@@ -323,7 +323,6 @@ void vAfisHelpMinimal()
         "-f sau --fisiere           -> se caută doar fișiere.\n"\
         "-d sau --directoare        -> se caută doar directoare.\n"\
         "-a sau --adancime <număr>  -> numărul de subdirectoare în jos pt căutare.\n" \
-        "-r sau --regex <expresie>  -> căutarea se face respectând regulile regex.\n"\
         "-m sau --min-size <număr>  -> sunt selectate doar fișierele cu dimensiunea\n"\
         "\t\t\t\tminimă de <număr> = MegaBytes.\n"\
         "-M sau --maxn-size <număr> -> sunt selectate doar fișierele cu dimensiunea\n"\

@@ -33,6 +33,9 @@ Sau:
         este numele directorului din care se pornește căutarea,
     2) -r <expresie regex> sau --regex <expresie regex>, unde <expresie regex>
         este o expresie regex validă folosită la căutarea fișierului.
+        Dacă este folosită opțiunea, se vor folosi regulile regex la căutarea
+        fișierelor sau directoarelor. Altfel, căutarea se face după nume.
+
 Sau:
     O singură opțiune, dar care să fie -h sau --help, caz în care este afișat
     acest text, sau un alt text cu opțiunile de start.
@@ -55,9 +58,6 @@ Alte opțiuni, neobligatorii, la lansarea programului:
         directoare de sub directorul de start în care se face căutarea.
         Dacă nu este folosită această opțiune, căutarea se face în toate
         subdirectoarele directorului de start.
-    *   -r sau --regex <expresie regex>:
-        Dacă este prezentă opțiunea, se vor folosi regulile regex la căutarea
-        fișierelor sau directoarelor. Altfel, căutarea se face după nume.
     *   -m sau --min-size, urmată obligatoriu de <număr>, în Megabytes.
         Vor fi afișate doar fișierele care au dimensiunea mai mare decât <număr>;
         -M sau --max-size, urmată obligatoriu de <număr>, în Megabytes.
